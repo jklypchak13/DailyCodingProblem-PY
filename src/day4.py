@@ -26,6 +26,10 @@ def get_lowest_missing_val(arr):
             arr[j] = temp
             j += 1
 
+    # Trim negative/zero values
+    arr = arr[j:]
+    n = len(arr)
+
     # Flip Values if non-negative
     for i in range(0, n):
         if(abs(arr[i])-1 < n and arr[abs(arr[i])-1] > 0):
@@ -35,7 +39,7 @@ def get_lowest_missing_val(arr):
     for i in range(0, n):
         if arr[i] > 0:
             return i+1
-    return n-j+1
+    return n+1
 
 
 # Unit Tests
@@ -75,6 +79,11 @@ class TestArrayLowVal(unittest.TestCase):
 
         arr = [1, 2, 0]
         expected = 3
+        self.assertEqual(get_lowest_missing_val(arr), expected)
+
+    def test_multiple_negative(self):
+        arr = [3, 4, -1, -2]
+        expected = 1
         self.assertEqual(get_lowest_missing_val(arr), expected)
 
 
