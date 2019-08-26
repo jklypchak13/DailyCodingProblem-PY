@@ -8,8 +8,6 @@
 
 import unittest
 
-# Interesting Observation: This seems to be the same as the Fibonacci Number of n, where n is equal to the number
-# of two digit characters.
 # This function runs in O(n) time and uses constant memory
 
 
@@ -22,15 +20,18 @@ def get_count(data):
     memo = [1, 1]
 
     for index in range(1, len(data)):
+
         prev_char = data[index-1]
         char = data[index]
 
+        # If currently found a 'collision' of a letter > 9
         if prev_char is '1' or (prev_char is '2') and char < '7':
             temp_val = memo[1] + memo[0]
             memo[0] = memo[1]
             memo[1] = temp_val
         else:
             memo[0] = memo[1]
+
     return memo[1]
 
 
