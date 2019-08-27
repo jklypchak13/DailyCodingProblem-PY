@@ -66,7 +66,7 @@ class TestDecodeCount(unittest.TestCase):
             "111",
             "121",
             "376",
-            "7842911",
+            "117842911",
             "1111",
             "12121"
         ]
@@ -74,7 +74,7 @@ class TestDecodeCount(unittest.TestCase):
             3,
             3,
             1,
-            2,
+            6,
             5,
             8
         ]
