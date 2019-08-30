@@ -17,7 +17,7 @@ import time
 # for testing purposes
 def schedule_job(f, n, **kwargs):
 
-    desired_time = time.time() + n/1000
+    desired_time = time.time() + n / 1000
 
     while desired_time > time.time():
         pass
@@ -33,7 +33,7 @@ class TestScheduler(unittest.TestCase):
 
     def test_one_millisecond(self):
         given = (a, 1)
-        expected = time.time() + (1/1000)
+        expected = time.time() + (1 / 1000)
 
         self.assertAlmostEqual(schedule_job(*given), expected, 4)
 
@@ -63,7 +63,7 @@ class TestScheduler(unittest.TestCase):
 
     def test_uneven(self):
         given = (a, 667)
-        expected = time.time() + 667/1000.0
+        expected = time.time() + 667 / 1000.0
 
         self.assertAlmostEqual(schedule_job(*given), expected, 4)
 
