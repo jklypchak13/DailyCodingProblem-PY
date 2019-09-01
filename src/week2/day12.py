@@ -18,18 +18,24 @@
 import unittest
 
 
-# This problem is solved in O(n) time and O(n) memory
+# This problem is solved in O(n) time and O(m) memory
+#   where n is the number of steps and m is the largest step
 def stair_count(n, steps):
-    memo = [1] * (n + 1)
+
+    # Memo will keep track of the previous m steps, where m is the largest step size.
+    max_step = max(steps)
+    memo = [1] * max(steps)
     current_val = 1
     for i in range(n + 1):
         current_val = 0
         for index, step_count in enumerate(steps):
             if i - step_count >= 0:
-                current_val += memo[i - step_count]
+                current_val += memo[(i - step_count) % max_step]
+
+        # Handles checking past the 0th step.
         if current_val == 0:
             current_val = 1
-        memo[i] = current_val
+        memo[i % max_step] = current_val
     return current_val
 
 
@@ -54,6 +60,12 @@ class TestStepCount(unittest.TestCase):
         self.assertEqual(stair_count(*given), expected)
 
     def test_step_count_normal(self):
+        expected = 8
+        given = (6, [1, 3, 5])
+
+        self.assertEqual(stair_count(*given), expected)
+
+    def test_step_large(self):
         expected = 47
         given = (10, [1, 3, 5])
 
